@@ -1,0 +1,66 @@
+body{
+    background-color:rgb(99, 53, 81);
+}
+
+
+
+.btn:hover{
+    background-color:rgb(109, 36, 97)
+}
+.Container{
+    background-color: rgb(56, 11, 56);
+    margin: 0px 0px;
+    border: 20px solid rgb(68, 26, 68);
+    padding: 20px;
+    color: rgb(255, 255, 255);
+    font-style: oblique;
+    border-radius: 10px;
+    text-align: center;
+}
+.btn{
+    border: 0px;
+
+    padding:15px 35px;
+    
+    border-radius: 5px; 
+    font-weight: 800px;
+    background-color: rgb(124, 40, 110);
+    color: rgb(255, 255, 255)
+}
+
+.caja-email{
+font: oblique;
+}
+   
+
+.INICIO{
+    font-style:inherit;
+    padding: 30px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(161, 81, 148);
+    border-radius: 10px;
+    position: absolute;
+    width: 300px;   
+    
+}
+
+.container1{
+max-width: 1400px;
+margin: auto;
+}
+
+.registro{
+    margin-top: 400px;
+   
+}
+.mail{
+    margin:50px;
+
+   
+}
+
+.pass{
+    margin: 40px;
+}

@@ -1,0 +1,304 @@
+INDEX.JS
+import { navBarComponent } from "./componentes/navbar.js";
+
+let navcontainer = document.querySelector('header');
+
+window.addEventListener('load',()=>{
+    navcontainer.innerHTML = navBarComponent;
+    document.title = "Second Twin";
+})
+
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+const usuariosRegistrados = [];
+const registro = document.getElementById("register");
+
+const registroForm = document.getElementById("registroForm");
+registroForm.addEventListener("submit", function(event) {
+    if(nombre == "" && apellido == "" && correo == "" && contraseña == "" && fechadenacimiento == ""){
+        alert("complete todos los campos antes de seguir");
+        return;
+    }
+    else{
+    const nombre = document.getElementById("regname").value;
+    const apellido = document.getElementById("reglastname").value;
+    const correo = document.getElementById("regmail").value;
+    const contraseña = document.getElementById("regpassword").value;
+    const fechadenacimiento = document.getElementById("regdate").value;
+    usuariosRegistrados.push({nombre,apellido, correo, contraseña ,fechadenacimiento});
+    alert("Registro exitoso");
+    registroForm.reset();
+    }
+    
+    });
+const loginForm = document.getElementById("LoginForm");
+loginForm.addEventListener("click", function(event) {
+    if(correo == "" && contraseña == ""){
+        alert("Complete los campos");  
+        return;   
+    }else{
+    const correo = document.getElementById("logmail").value;
+    const contraseña = document.getElementById("logpassword").value;
+    const usuarioEncontrado = usuariosRegistrados.find(usuario => usuario.correo === correo && usuario.contraseña === contraseña);        
+    if (usuarioEncontrado == true) {         
+        loginForm.reset();     
+        window.location.href = 'home.html'; 
+        }             
+    else
+    {
+        alert("Datos Incorrectos, Ingreselos nuevamente");     
+    }}
+
+
+});});
+
+const logout = document.getElementById("logout");
+let usuarioAutenticado = true;
+    if (usuarioAutenticado) {
+        logout.addEventListener("click", (e)=> {
+        usuarioAutenticado = false;
+        window.location.href = "index.html";})
+    } else {
+        window.location.href = "index.html"; 
+    }
+
+
+
+
+NAVABAR.JS
+const url = 'http://127.0.0.1:5500/';
+
+const navElements = [
+{tittle : 'Oversized T-shirts', link: `${url}categoria1.html`},
+{tittle : 'Sleeveless T-shirts', link: `${url}categoria2.html`},
+{tittle : 'Long sleeve T-shirts', link: `${url}categoria3.html`}
+]
+
+
+export const navBarComponent = `<nav class = "barra">   
+<a href="home.html"><img src="Assets/6139303 (1).png" alt="casita.png" width="100" height="100" id = "icono"></a> 
+ 
+<h1 id = "tit">Second Twin Store</h1>   
+<ul> 
+${
+navElements.map(e=>{
+return `<a href=${e.link}>${e.tittle}</a>`}).join('')}
+<button class = "btnlogout" id ="logout" >
+Logout
+</button></ul>
+   
+</nav>`
+
+CARDS.JS
+export const CardComponent = (data) =>{
+return`
+<div class = "carta">   
+<img src=${data.img} alt="imagen.jpeg" width="200" height="200">
+      
+<h3>
+ ${data.tittle}
+</h3>
+<h6>${data.desc}</h6>
+   <h3 id = "price">
+       ${data.price}
+     </h3>
+    <button class = "btncard">
+     Add to cart
+     <input type="number" min = "1" placeholder="1">
+    </button>
+</div>`
+    
+}
+
+
+
+
+
+HOME.JS
+
+import { CardComponent } from "./componentes/cards.js";
+
+let cardata = [
+    {id : "1",img: "./Assets/im1.jpeg" ,tittle: "T-Shirt Oversize vintage CLUB negra", desc: "Remera diseño oversized, es decir, corte holgado en mangas, hombros y pecho. Confeccionada con tela de jersey peinado 24/1,calidad premium"
+,price: "$5000" },
+{
+    id : "19",img: "Assets/man3.webp" ,tittle: " Polera Térmica De Hombre Frizada Manga Larga Super Abrigada", desc: "Polera térmica de hombre. Frizada en el interior, reforzadas con doble costura, calce perfecto. De poliéster con elastano. Mantienen la temperatura corporal, ideal para cualquier tipo de entrenamiento o para todos los días, debajo de tu ropa habitual"
+    ,price: "$9000" 
+},
+{
+    id : "3",img: "Assets/oversize3.1.webp" ,tittle: " Remera Oversize Rayada Grande Y Amplia Manga Corta", desc: " + Remeron amplio para todas las tallas, super amplio fresco y versátil.+ Busto 75 cm esta medida de sisa a sisa, un contorno seria aprox. 130 cm. que abarca sin estirar.+ Largo aprox 75.+ El corte de la remera Maxi, tal cual se muestra en las fotos."
+    ,price: "$4000" 
+},
+{
+    id : "13",img: "Assets/mus5.webp" ,tittle: " Musculosa  Mujer Morley Moda Talle S-xxl", desc: "ARTICULO SUPER COMODO DE MODA Y MUY VERSATILMORLEY DE ALTO SPANDEX , LO QUE LO HACE UN PRODUCTO QUE SE ADAPTA A -------VARIOS TALLES DESDE EL S AL XXL POR QUE SE ESTIRA MUCHISIMO"
+    ,price: "$3000" 
+},
+{
+    id : "21",img: "Assets/man5.webp" ,tittle: "  Remera Manga Larga Niños Buzz Lightyear Disney® Pelicula", desc: "A los niños les encantará esta nueva remera manga larga Disney® Original de Toy Story 4! Esta prenda es perfecta para el uso urbano, hecha con la mejor calidad de algodón, con un diseño de Toy Story 4 que los hará sentirse parte de la magia de Disney. La remera cuenta con un cuello redondo y manga larga, ideal para los niños que necesitan un look más moderno"
+    ,price: "$2000" 
+},
+{
+    id : "23",img: "Assets/man7.webp" ,tittle: " Pack Por 2 Remeras Algodón Manga Larga Hombre Talles 1 Al 6", desc: "Remera algodón manga larga hombre EL PRECIO ES POR 2 UNIDADES"
+    ,price: "$15.000" 
+},
+{
+    id : "6",img: "Assets/oversize6.webp" ,tittle: "Remeron Oversize Mujer Diseño Princesas Disney Y Personajes", desc: "REMERON OVERSIZE AMPLIO DISEÑO PRINCESAS DE DISNEY Y PERSONAJES ¡ Remeras de algodón de excelente calidad y estampadas con tus personajes animados preferidos ! M E D I D A S: 53 cm de axila a axila y 73 cm de largo"
+    ,price: "$9000" 
+},
+{
+    id : "16",img: "Assets/mus8.webp" ,tittle: " Musculosa Olimpica Golds Gym Gimnasio Crossfit", desc: "Remeras musculosas para lucir en tu gimnasio.Muchos de nuestros diseños son exclusivos que difícilmente encontraras en otro lugar.Nuestras remeras son de 100% algodón. Los estampados están hechos con vinilo importado."
+    ,price: "$8000" 
+},
+]
+
+let cardcontainer = document.getElementById('card')
+
+window.addEventListener('load',() => {
+const cards = cardata.map(e => {
+    return CardComponent(e)
+}).join('')
+
+cardcontainer.innerHTML = cards
+})
+
+CATEGORY1.JS
+import { CardComponent } from "./componentes/cards.js";
+
+let cardata = [
+    {id : "1",img: "./Assets/im1.jpeg" ,tittle: "T-Shirt Oversize vintage CLUB negra", desc: "Remera diseño oversized, es decir, corte holgado en mangas, hombros y pecho. Confeccionada con tela de jersey peinado 24/1,calidad premium"
+,price: "$5000" },
+{
+    id : "2",img: "Assets/oversize2.webp" ,tittle: "Remera Oversize Estampada 100%algodon Premium Clotex", desc: "Remera Estampada Oversize Fit LINEA PREMIUMCaracterísticas:- 100% Algodón jersey peinado 24/1 de máxima calidad.- Prenda armada en Overlock de 4 hilos reforzando costuras de seguridad.- No destiñe.- No encoje.- Cuello reeb al tono.- Tirillera de hombro a hombro.- TapaCostura con hilos de algodón en mangas y cintura.- Tira de limpieza.- Estampa de primera calidad"
+    ,price: "$8000" 
+},
+{
+    id : "3",img: "Assets/oversize3.1.webp" ,tittle: " Remera Oversize Rayada Grande Y Amplia Manga Corta", desc: " + Remeron amplio para todas las tallas, super amplio fresco y versátil.+ Busto 75 cm esta medida de sisa a sisa, un contorno seria aprox. 130 cm. que abarca sin estirar.+ Largo aprox 75.+ El corte de la remera Maxi, tal cual se muestra en las fotos."
+    ,price: "$4000" 
+},
+{
+    id : "4",img: "Assets/oversize4.1.webp" ,tittle: "Remerón Mujer Larga Algodon Liso Oversize", desc: "REMERON BASICAS11 COLORESInfaltable para completar tu Outfit° Confeccionadas en 100% ALGODÓN PEINADO INVISIBLE PREMIUM° Cuello redondo° Manga CaidaTALLES : TALLE L ( Abarca S - M - L )"
+    ,price: "$4000" 
+},
+{
+    id : "5",img: "Assets/oversize5.webp" ,tittle: " Remera Rusty Monk Oversize - Queen Island", desc: "La remera manga corta Rusty Monk es una prenda de diseño estampado con un calce Oversize. Está hecha de algodón peinado suave y cómodo. Estampado en la parte delantera y dorso .Etiquetas tejidas de alta calidad. Disponible en talle s al xl , es ideal para los amantes del surf y aquellos que buscan un estilo relajado y casual.Excelente diseño y calidad Tela 100% algodón Tejido: Jersey 30/1 Fit: Oversize Estampa: serigrafía Avios"
+    ,price: "$10.000" 
+},
+{
+    id : "6",img: "Assets/oversize6.webp" ,tittle: "Remeron Oversize Mujer Diseño Princesas Disney Y Personajes", desc: "REMERON OVERSIZE AMPLIO DISEÑO PRINCESAS DE DISNEY Y PERSONAJES ¡ Remeras de algodón de excelente calidad y estampadas con tus personajes animados preferidos ! M E D I D A S: 53 cm de axila a axila y 73 cm de largo"
+    ,price: "$9000" 
+},
+{
+    id : "7",img: "Assets/oversize7.webp" ,tittle: "Remera Hombre Farenheite Oversize Al Ambition", desc: "Marca:Farenheite -Modelo:Ambition-Género:Hombre-Edad:Adultos-Tipo de prenda:Remera-Diseño de la tela:Liso"
+    ,price: "$8000" 
+},
+{
+    id : "8",img: "Assets/oversize8.webp" ,tittle: " Remera Oversize Juvenil Unisex Doble Estampado M Al Xxl", desc: "linda remera en modelo PALM ANGELS oversize unisex , en varios colores tal cual la imágen de la publicación es sueltito fresco super cómodos del talle M al XXL"
+    ,price: "$6000" 
+},
+]
+
+let cardcontainer = document.getElementById('card')
+
+window.addEventListener('load',() => {
+const cards = cardata.map(e => {
+    return CardComponent(e)
+}).join('')
+
+cardcontainer.innerHTML = cards
+})
+
+
+
+CATEGORY2.JS
+import { CardComponent } from "./componentes/cards.js";
+
+let cardata = [
+    {id : "9",img: "Assets/111.jpg" ,tittle: "  T-Shirt Lakers Violet James", desc: "Camiseta para Niños Oficial Nba A Lakers Lebron James- Equipo: Angeles Lakers - Dorsal (Lebron James)- Licencia Oficial NBA- Color: Amarillo- Color: Negro- Marca: NBA Athletic PRODUCTO CON LICENCIA OFICIAL DE LA NBA."
+,price: "$4000" },
+{
+    id : "10",img: "Assets/musculosa2.webp" ,tittle: "Musculosa Lisas De Jersey 100% Algodón", desc: "Tela: Algodón Jersey 24/1 Peinado. *Cuello: En Tela de Rib. *ALGODON PEINADO *COLORES: NEGRO, VERDE y BLANCO *TALLES DEL XS AL 3XL"
+    ,price: "$3000" 
+},
+{
+    id : "11",img: "Assets/mus3.webp" ,tittle: " Musculosa Capucha Entrenamiento Sudadera Gym Gdo Workout", desc: " Confeccionadas en set de Poliester de primera calidad.- corte regular fit: corte normal (no son ajustadas)- Sirven para toda disciplina deportiva. gym, entranamiento funcional, running, boxeo y mucho mas.- Útiles tanto para actividades indoor como outdoor"
+    ,price: "$7000" 
+},
+{
+    id : "12",img: "Assets/mus4.webp" ,tittle: "  Musculosa X3 Tiras Bretel Mujer Algodón Pora", desc: "Camiseta de bretel, x3 el material es de algodon Marca: Pora Talles: 1-2-3-4-5"
+    ,price: "$6000" 
+},
+{
+    id : "13",img: "Assets/mus5.webp" ,tittle: " Musculosa  Mujer Morley Moda Talle S-xxl", desc: "ARTICULO SUPER COMODO DE MODA Y MUY VERSATILMORLEY DE ALTO SPANDEX , LO QUE LO HACE UN PRODUCTO QUE SE ADAPTA A -------VARIOS TALLES DESDE EL S AL XXL POR QUE SE ESTIRA MUCHISIMO"
+    ,price: "$3000" 
+},
+{
+    id : "14",img: "Assets/mus6.webp" ,tittle: " Musculosas Deportiva Entrenamiento Gimnasio G6", desc: "Musculosas Pechera Deportiva Gimnasio Futbol Entrenamiento LISA en Jersey Set de poliéster.Apto sublimado y estampado (no damos ese servicio)El packs es de 3 musculosas mismo talle y los colores que ofrece la foto."
+    ,price: "$5000" 
+},
+{
+    id : "15",img: "Assets/mus7.webp" ,tittle: " Pack X 3 Remeras Musculosas Nenes Estampadas Talles 2 Al 16", desc: "PACK POR 3 REMERAS MUSCULOSAS DE NENES ESTAMPAS VARIASTALLES DEL 2 AL 16"
+    ,price: "$18.000" 
+},
+{
+    id : "16",img: "Assets/mus8.webp" ,tittle: " Musculosa Olimpica Golds Gym Gimnasio Crossfit", desc: "Remeras musculosas para lucir en tu gimnasio.Muchos de nuestros diseños son exclusivos que difícilmente encontraras en otro lugar.Nuestras remeras son de 100% algodón. Los estampados están hechos con vinilo importado."
+    ,price: "$8000" 
+},
+]
+let cardcontainer = document.getElementById('card')
+
+window.addEventListener('load',() => {
+const cards = cardata.map(e => {
+    return CardComponent(e)
+}).join('')
+
+cardcontainer.innerHTML = cards
+})
+
+
+CATEGORY3.JS
+import { CardComponent } from "./componentes/cards.js";
+
+let cardata = [
+    {id : "17",img: "Assets/222.webp" ,tittle: "Erima Liga Long Sleeves", desc: "FUNCTIONAL JERSEY WITH VENTILATION.The LIGA TRIKOT is a real classic. The light material dries quickly. Mesh inserts provide targeted. ventilation. Plain and plain you will cut a good figure in every sport"
+    ,price: "$6000" 
+},
+{
+    id : "2",img: "Assets/man2.webp" ,tittle: " Remeras Lisas Algodón Mangas Largas S - Xxl", desc: "Jersey 100% Algodón 24/1"
+    ,price: "$5000" 
+},
+{
+    id : "19",img: "Assets/man3.webp" ,tittle: " Polera Térmica De Hombre Frizada Manga Larga Super Abrigada", desc: "Polera térmica de hombre. Frizada en el interior, reforzadas con doble costura, calce perfecto. De poliéster con elastano. Mantienen la temperatura corporal, ideal para cualquier tipo de entrenamiento o para todos los días, debajo de tu ropa habitual"
+    ,price: "$9000" 
+},
+{
+    id : "20",img: "Assets/man4.webp" ,tittle: "Remera Proteccion Solar Aire Libre Unisex Payo", desc: "Diseñada para adultos , con la misma calidad de siempre esta remera técnica otorga comodidad y proteccion a la hora de realizar todo tipo de actividad al aire libre "
+    ,price: "$8000" 
+},
+{
+    id : "21",img: "Assets/man5.webp" ,tittle: "  Remera Manga Larga Niños Buzz Lightyear Disney® Pelicula", desc: "A los niños les encantará esta nueva remera manga larga Disney® Original de Toy Story 4! Esta prenda es perfecta para el uso urbano, hecha con la mejor calidad de algodón, con un diseño de Toy Story 4 que los hará sentirse parte de la magia de Disney. La remera cuenta con un cuello redondo y manga larga, ideal para los niños que necesitan un look más moderno"
+    ,price: "$2000" 
+},
+{
+    id : "22",img: "Assets/man6.webp" ,tittle: "Remera Niño Manga Larga Avengers Licencia Oficial Marvel®", desc: "La Remera Niño Manga Larga Avengers Vengadores Marvel® es la prenda perfecta para los fanáticos de los superhéroes. Esta remera es ideal para los niños con un estilo urbano. Está confeccionada en algodón 100% de alta calidad y su diseño de los Avengers le da un toque moderno y divertido. La remera de manga larga cuenta con un cuello redondo y está disponible en talles desde T2 a 14. Esta prenda es cómoda, liviana y resistente. Además, es resistente al lavado y no se desgasta con el tiempo."
+    ,price: "$4000" 
+},
+{
+    id : "23",img: "Assets/man7.webp" ,tittle: " Pack Por 2 Remeras Algodón Manga Larga Hombre Talles 1 Al 6", desc: "Remera algodón manga larga hombre EL PRECIO ES POR 2 UNIDADES"
+    ,price: "$15.000" 
+},
+{
+    id : "24",img: "Assets/man8.webp" ,tittle: " Remera Camiseta Manga Larga De Morley Melody S-m-l Full", desc: "HERMOSA REMERA BÁSICA CONFECCIONADA EN MODAL CON LYCRA OTOÑO-INVIERNO"
+    ,price: "$5000" 
+},
+]
+let cardcontainer = document.getElementById('card')
+
+window.addEventListener('load',() => {
+const cards = cardata.map(e => {
+    return CardComponent(e)
+}).join('')
+
+cardcontainer.innerHTML = cards
+})

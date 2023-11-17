@@ -1,0 +1,246 @@
+INDEX.JS
+import { getData,setData,deleteData } from "./localStorage.js";
+import { navBarComponent } from "./componentes/navbar.js";
+try {
+let navcontainer = document.querySelector('header');
+
+window.addEventListener('load',()=>{
+    navcontainer.innerHTML = navBarComponent;
+    document.title = "Second Twin";
+})
+} 
+catch(error){
+    console.log(error);
+}
+
+try {
+const btnreg = document.getElementById("register");
+
+btnreg.addEventListener("click" ,() => {
+    const namereg = document.getElementById("regname").value;
+    const lastreg = document.getElementById("reglastname").value;
+    const emailreg = document.getElementById("regmail").value;
+    const passreg = document.getElementById("regpassword").value;
+    const datereg = document.getElementById("regdate").value;
+    
+    if( namereg == "" || lastreg == "" || emailreg == "" || passreg == "" || datereg == ""){
+        alert("complete todos los campos antes de seguir");
+    }
+    else{
+  
+    const newUser = {
+        name : namereg,
+        lastname : lastreg,
+        email : emailreg,
+        pass : passreg,
+        date : datereg
+    }
+
+   const users = getData('userData')
+   
+   users.push(newUser)
+
+   setData('userData', users)
+    }
+})  
+
+} 
+catch(error){
+    console.log(error);
+}
+
+
+try {
+
+const formlog = document.getElementById('formlog');
+
+formlog.addEventListener("submit", (e)=>{
+    e.preventDefault();
+    let usermail = document.getElementById('logmail').value
+    let userpass = document.getElementById('logpassword').value   
+    fetch('./dataUser.json').then(res => res.json()).then(users => {
+    const user = users.find(e => e.email === usermail && e.pass === userpass)
+   if(user){
+    sessionStorage.setItem('userData', JSON.stringify(user))
+    console.log(user);
+    window.location.href = 'http://127.0.0.1:5500/home.html';
+}
+    else{
+      alert("Credenciales Incorrectas");
+    }
+} )
+})}
+catch (error) {
+    console.log(error);
+}
+
+
+try {
+
+    const LogOut = (key) =>{
+        sessionStorage.removeItem(key)
+    }
+    const btnlogout = document.getElementById("logout");
+    
+    btnlogout.addEventListener("click",(e) => {
+        e.preventDefault();
+        LogOut('userData');
+        window.location.href = 'http://127.0.0.1:5500/index.html';
+    })
+    
+}
+catch (error) {
+    console.log(error);
+}
+
+
+NAVABAR.JS
+const url = 'http://127.0.0.1:5500/';
+
+const navElements = [
+{tittle : 'Oversized T-shirts', link: `${url}categoria1.html`},
+{tittle : 'Sleeveless T-shirts', link: `${url}categoria2.html`},
+{tittle : 'Long sleeve T-shirts', link: `${url}categoria3.html`}
+]
+
+
+export const navBarComponent = `<nav class = "barra">   
+<a href="home.html"><img src="Assets/6139303 (1).png" alt="casita.png" width="100" height="100" id = "icono"></a> 
+ 
+<h1 id = "tit">Second Twin Store</h1>   
+<ul> 
+${
+navElements.map(e=>{
+return `<a href=${e.link}>${e.tittle}</a>`}).join('')}
+<button class = "btnlogout" id ="logout" >
+Logout
+</button></ul>
+   
+</nav>`
+
+CARDS.JS
+export const CardComponent = (data) =>{
+return`
+<div class = "carta">   
+<img src=${data.img} alt="imagen.jpeg" width="200" height="200">
+      
+<h3>
+ ${data.tittle}
+</h3>
+<h6>${data.desc}</h6>
+   <h3 id = "price">
+       ${data.price}
+     </h3>
+    <button class = "btncard">
+     Add to cart
+     <input type="number" min = "1" placeholder="1">
+    </button>
+</div>`
+    
+}
+
+
+
+
+
+HOME.JS
+
+import { CardComponent } from "./componentes/cards.js";
+import { getData,setData,deleteData } from "./localStorage.js";
+
+
+  try {
+    const agregar = document.querySelector('#agregar');
+    
+    agregar.addEventListener("click" ,() => {
+        const name = document.querySelector('#tittle').value;
+        const price = document.querySelector('#price').value;
+        const cantidad = document.querySelector('#amount').value;
+
+        const producto = {
+            name : name,
+            price : price,
+            amount : cantidad
+        }
+    
+       const prod = getData('producto')
+       
+       prod.push(producto)
+    
+       setData('producto', prod)
+        }
+    )} 
+    catch(error){
+        console.log(error);
+    }
+
+
+
+
+
+
+try {
+  const idcategory = document.getElementById("categoria").value;
+  let cardHTML = "";
+  const container = document.getElementById("productos-container");
+
+  fetch('data.json')
+    .then(response => response.json())
+    .then(data => {
+      container.innerHTML = "";
+
+      let categoryToFilter;
+
+      switch (idcategory) {
+        case "1":
+          categoryToFilter = "oversize";
+          break;
+        case "2":
+          categoryToFilter = "sleeveles";
+          break;
+        case "3":
+          categoryToFilter = "longsleeve";
+          break;
+        default:
+          categoryToFilter = null;
+      }
+
+      data.forEach(producto => {
+        if (!categoryToFilter || producto.category === categoryToFilter) {
+          producto.productos.forEach((prod, i) => {
+            if  (idcategory === "0" && i % 3 === 0) {
+              console.log(prod);
+              cardHTML = CardComponent(prod, i + 1);
+              container.innerHTML += cardHTML;
+            }
+            else if(idcategory !== "0" ){
+              console.log(prod);
+              cardHTML = CardComponent(prod, i + 1);
+              container.innerHTML += cardHTML;
+            }
+
+          });
+        }
+      });
+    });
+} catch (error) {
+  console.log(error);
+}
+
+
+CARDS.JS
+export const CardComponent = (data, id) =>{
+  return`
+  <div class = "carta" id ="${id}">   
+  <img src=${data.img} id = "img" alt="imagen.jpeg" width="200" height="200">
+       
+  <h3 id = "tittle">${data.tittle}</h3>
+  <h6 id = "desc">${data.desc}</h6>
+  <h3 id = "price">${data.price}</h3>
+
+      <button class = "btncard" id = "agregar"}>
+       Add to cart
+       <input id = "amount" type="number" min = "1" placeholder="1">
+      </button>
+  </div>`
+}

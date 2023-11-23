@@ -1,0 +1,23 @@
+[
+{
+"name": "usuasrio1",
+"lastname": "apellido1",
+"email" : "usuario1@gmail.com",
+"pass" : "12345",
+"date" : "12/12/12"
+},
+{
+"name": "usuasrio2",
+"lastname": "apellido2",
+"email" : "usuario2@gmail.com",
+"pass" : "12345",
+"date" : "12/12/12"
+},
+{
+"name": "usuasrio3",
+"lastname": "apellido3",
+"email" : "usuario3@gmail.com",
+"pass" : "12345",
+"date" : "12/12/12"
+}
+]

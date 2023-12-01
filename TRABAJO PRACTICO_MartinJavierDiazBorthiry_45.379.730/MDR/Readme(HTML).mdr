@@ -233,3 +233,43 @@
 <script type = "module" src="index.js"></script>
 <script type = "module" src="home.js"></script>
 </html>
+
+/////////////PERFIL.JS//////////////
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./Styles/style.css">
+</head>
+<body> 
+ <header>
+ 
+ </header>
+ <div class = "cartaperfil">   
+      <div id = "datos">     
+      </div>  
+       
+  </div>
+  <div class ="contact">
+    <h5>For any questions or problems contact us</h5>
+    <a href="mailto:SecondTwinhelp@gamil.com" id = "link"><img src="Assets/correo.png" alt="correo.png"width="20" height="20"></a>
+    <a href="sms:+34695685920" id = "link"><img src="Assets/phone4.png" alt="phone.png"width="20" height="20"></a>
+    <a href="https://www.instagram.com/" id = "link"><img src="Assets/ig.webp" alt="phone.png"width="20" height="20"></a>
+</div>
+
+<div class = "titulos2">    
+    <h6 class="toph">Name |</h6>
+    <label>Price |</label>
+    <label>Amount |</label>
+    <button id = "remove">Remove History</button>
+  </div>
+
+<div id = "historial">
+</div>
+
+<script type ="module" src = "index.js"></script>
+<script type = "module" src = "home.js"></script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 import { CardComponent } from "./componentes/cards.js";
 import { getData,setData,deletedata} from "./localStorage.js";
-
+import { carduser } from "./componentes/carduser.js";
 
 document.addEventListener('DOMContentLoaded', function () {
 try {
@@ -74,25 +74,82 @@ try {
       };
 
       const prodtList = getData('ProdList');
+      const prodh = getData('History');
       const existingProduct = prodtList.find(product => product.tittle === tittle);
-      if (existingProduct) {
+      const existingProduct2 = prodh.find(product => product.tittle === tittle);
+      if (existingProduct && existingProduct2) {
         existingProduct.amount = Number(existingProduct.amount) + Number(amount);
+        existingProduct2.amount = Number(existingProduct.amount) + Number(amount);
     } else {
         prodtList.push(prod);
+        prodh.push(prod);
     }
       setData('ProdList', prodtList);
+      setData('History', prodh);
     
 }})}
   catch (error) {
     console.log(error);
   }
+  try{
+    const historial = getData('History');
+   
+    function mostrarProductos() {
+      const History = document.getElementById('historial');
 
+      History.innerHTML = '';       
+      historial.forEach(producto => {
+        const div = document.createElement('div');
+        div.classList.add('producto');
+
+        const tittlespan = document.createElement('span');
+        tittlespan.textContent = producto.tittle + " |";
+     
+        const pricespan = document.createElement('span');
+        pricespan.textContent = producto.price + " |";
+
+        const amountspan = document.createElement('span');
+        amountspan.textContent = producto.amount + " |";
+
+        div.appendChild(tittlespan);
+        div.appendChild(pricespan);
+        div.appendChild(amountspan);
+
+
+       
+        History.appendChild(div);
+
+      });
+    
+  }
+
+
+  mostrarProductos();
+}
+  catch (error) {
+    console.log(error);
+}
+
+try{
+  const btnremove = document.getElementById("remove");
+  btnremove.addEventListener("click", ()=>{
+  alert("History Removed");
+
+  deletedata('History');      
+  location.reload();  
+  })
+}
+catch (error) {
+  console.log(error);
+}
 
 try{
   const productos = getData('ProdList');
+ 
 
-        function mostrarProductos() {
+  function mostrarProductos() {
             const carrito = document.getElementById('carrito');
+           
             carrito.innerHTML = ''; 
 
             productos.forEach(producto => {
@@ -123,7 +180,10 @@ try{
                 div.appendChild(removebtn);
 
                 carrito.appendChild(div);
+              
             });
+         
+           
         }
 
         
@@ -144,7 +204,7 @@ catch (error) {
 }
 });
 
-
+try{
 const btnbuy = document.getElementById("buy");
 btnbuy.addEventListener("click" ,() => {
 const adress = document.getElementById("adress").value;
@@ -183,3 +243,25 @@ document.getElementById("location").value = "";
 deletedata('ProdList');      
 location.reload();  
 })
+
+}catch (error) {
+  console.log(error);
+};
+
+
+try{
+const getUserdata = (key)=>{
+  return JSON.parse(sessionStorage.getItem(key))
+}
+
+
+window.addEventListener('load', ()=>{
+  const userinfo = getUserdata('userData')
+  console.log(userinfo)
+  const datos = document.getElementById("datos");
+  const card = carduser(userinfo);
+  datos.innerHTML = card;
+
+})}catch (error) {
+  console.log(error);
+};

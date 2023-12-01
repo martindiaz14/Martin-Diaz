@@ -46,12 +46,23 @@ button a{
     text-decoration: none;
 }
 .btnlogout{
-    padding:15px 40px;
+    padding: 10px 30px;
     border: 0px;
     margin-top: 10px;
     border-radius: 5px; 
     font-weight: 800px;
     margin-left: 20px;
+}
+#remove{
+    margin: 10px;
+    background-color: #636262;
+    border-radius: 5px;
+    padding: 10px;
+}
+#remove:hover{
+
+    background-color: #474747;
+
 }
 /*Diseño general de botones*/
 /*Diseño de carrito*/
@@ -64,12 +75,108 @@ button a{
     background: linear-gradient(150deg, #a71c8f ,#8820b8);
 }
 .cart:hover{
- transition: 2s;
+ transition: 0.2s;
+ padding:12px ;
   background: linear-gradient(150deg, #b4369f ,#6e1c94);
 }
 /*Diseño de carrito*/
 
+/*Diseño de perfil*/
+.perfil{
+    margin-top: 20px;
+    position: fixed;
+    border-radius: 100px;
+    padding:10px ;
+    left: 3%;
+    background: linear-gradient(150deg, #a71c8f ,#8820b8);
+}
+.perfil:hover{
+ transition: 0.2s;
+ padding:12px ;
+  background: linear-gradient(150deg, #b4369f ,#6e1c94);
+}
 
+.cartaperfil{  
+   margin-top: 120px;
+   margin-left: 20px;
+   position: fixed;
+    width: 350px;
+    border-radius: 10px;
+    padding:20px ;
+    background: linear-gradient(150deg, #8c3aac ,rgb(153, 16, 119));
+    box-shadow: 5px 5px 0px #000;
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+#link{
+    margin: 25px;
+    padding: 5px;
+    border-radius: 100px;
+    width: 100%;
+}
+#link:hover{
+transition: 0.5s;
+background-color: rgb(141, 30, 113);
+padding: 8px;
+}
+.contact{    
+    position: fixed;
+    margin-top: 630px;
+    margin-left: 20px;
+    width: 350px;
+    background: linear-gradient(150deg, #b4369f ,#6e1c94);
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 0px #000;
+}
+#historial{
+    background-color:#333333;
+    padding: 40px;
+    width: 550px;
+    border-radius: 10px;
+    display: grid;
+    color: aliceblue;
+    box-shadow: 5px 5px 0px #000;
+    float: right;  
+    margin-top: 100px;
+    margin-right: 10px;
+}
+.toph{
+    margin-right: 220px;
+    display:inline;
+    width: 100%;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+}
+.titulos2{
+    margin-left: 792px;
+    margin-top: 96px;
+    position: fixed;
+    color: white;
+    background-color: #333333;
+    padding: 20px 60px 0px 20px;
+    width: 550px;
+    border-radius: 5px;
+
+
+}
+.titulos2 label{
+    display:inline;
+    width: 100%;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 10px;
+}
+#historial button{   
+    margin: 10px;
+    background-color: #636262;
+    border-radius: 5px;
+    padding: 10px;
+  
+}
+/*Diseño de perfil*/
 
 /*Diseño de El titulo de Inicio*/
 .Container{
@@ -305,9 +412,12 @@ width: auto;
     margin-left: -9px;
 }
 .titulos{
-    margin-left: 100px;
-    margin-top: 20px;
+    margin-left: 80px;
+    margin-top: 0px;
     position: fixed;
+    background-color: #333333;
+    padding: 10px;
+
 }
 .titulos label{
     display:inline;

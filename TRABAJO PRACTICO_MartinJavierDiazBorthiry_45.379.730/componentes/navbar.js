@@ -13,7 +13,7 @@ export const navBarComponent = `<nav class = "barra">
 ${
 navElements.map(e=>{
 return `<a href=${e.link}>${e.tittle}</a>`}).join('')}
-<a href="index.html"><button class="btnlogout" id ="logout"  >Logout</button></a></ul>
+<a href="index.html"><button class="btnlogout" id ="logout"><img src="Assets/salir.png" alt="phone.png"width="20" height="20"></button></a></ul>
 <script> 
 src = "index.js"
 

@@ -75,17 +75,14 @@ try {
 
       const prodtList = getData('ProdList');
       const prodh = getData('History');
-      const existingProduct = prodtList.find(product => product.tittle === tittle);
-      const existingProduct2 = prodh.find(product => product.tittle === tittle);
-      if (existingProduct && existingProduct2) {
-        existingProduct.amount = Number(existingProduct.amount) + Number(amount);
-        existingProduct2.amount = Number(existingProduct.amount) + Number(amount);
-    } else {
-        prodtList.push(prod);
-        prodh.push(prod);
-    }
+
+      prodtList.push(prod);     
+      prodh.push(prod);
+        
       setData('ProdList', prodtList);
       setData('History', prodh);
+
+     
     
 }})}
   catch (error) {
@@ -115,8 +112,6 @@ try {
         div.appendChild(pricespan);
         div.appendChild(amountspan);
 
-
-       
         History.appendChild(div);
 
       });
